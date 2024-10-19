@@ -7,11 +7,24 @@ const Post = require("./models/Post");
 const Lesson = require("./models/Lesson");
 const Subject = require("./models/Subject");
 
+const cors = require("cors");
+const path = require("path");
+
 const postRoutes = require("./routers/PostRoutes");
 const lessonRoutes = require("./routers/LessonRoutes");
 const subjectRoutes = require("./routers/SubjectRoutes");
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
+
+// use public folder
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
